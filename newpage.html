@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Image to Google Sheets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+    
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+    
+        form {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            max-width: 90%;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+    
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    
+        #uploadButton {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+    
+        #uploadButton:hover {
+            background-color: #0056b3;
+        }
+    
+        #status {
+            margin-top: 20px;
+            text-align: center;
+        }
+    
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    
+        /* Add a media query for screens with a maximum width of 768px (typical for mobile devices) */
+        @media (max-width: 768px) {
+            form {
+                padding: 10px;
+            }
+    
+            input[type="text"] {
+                padding: 8px;
+            }
+    
+            #uploadButton {
+                padding: 8px 16px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Upload Data</h1>
+    
+    <form id="dataForm" method="post" name="file">
+        <a href="https://imgbb.com/" target="_blank">Photo to URL:</a>
+        <label for="photo">Photo:</label>
+        <input type="text" id="photo" name="photo"><br><br>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" /><br><br>
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" /><br><br>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" /><br><br>
+
+        <label for="places">Places:</label>
+        <input type="text" id="places" name="places" /><br><br>
+
+        <label for="weight">Weight:</label>
+        <input type="text" id="weight" name="weight" /><br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" /><br><br>
+
+        <label for="whatapp">WhatsApp:</label>
+        <input type="text" id="whatapp" name="whatapp" /><br><br>
+
+        <input type="submit" value="Upload" id="uploadButton" />
+    </form>
+    <div id="status"></div>
+
+    <script>
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyTbExC9sSADlUEiGt1gX_UQR3cIIs6AFaCE9v94JSEUqsr2IPqyY71EhSJQJWU7sL8Yg/exec'
+    const form = document.forms['file']
+    
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => alert("Thank you! your form is submitted successfully." ))
+      .then(() => {  window.location.reload(); })
+      .catch(error => console.error('Error!', error.message))
+    })
+                
+    </script>
+</body>
+</html>
